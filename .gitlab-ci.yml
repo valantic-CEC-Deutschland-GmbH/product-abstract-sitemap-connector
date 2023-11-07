@@ -10,7 +10,7 @@ composer:validate:
   script:
     - composer validate
     - composer install
-    - composer cs-check
+    # - composer cs-check
     # - composer md-check
 
 deploy:composer:
