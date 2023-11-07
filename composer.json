@@ -1,0 +1,41 @@
+{
+    "name": "valantic-spryker/product-abstract-sitemap-connector",
+    "description": "Provides product abstract urls for valantic-spriker/sitemap module",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ValanticSpryker\\": "src/ValanticSpryker/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Valantic Andrius Rancevas"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "7.4"
+        },
+        "preferred-install": "dist",
+        "use-include-path": true,
+        "sort-packages": true,
+        "github-protocols": [
+            "https"
+        ],
+        "process-timeout": 900,
+        "chromium-revision": 814168,
+        "gitlab-domains": [
+            "gitlab.nxs360.com"
+        ],
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "spryker/kernel": "^3.30.0"
+    }
+}
