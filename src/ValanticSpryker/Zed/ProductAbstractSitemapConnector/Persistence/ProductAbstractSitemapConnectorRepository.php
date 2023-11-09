@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence;
 
 use Orm\Zed\Url\Persistence\Map\SpyUrlTableMap;
@@ -9,18 +11,17 @@ use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
- * @method ProductAbstractSitemapConnectorPersistenceFactory getFactory()
+ * @method \ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence\ProductAbstractSitemapConnectorPersistenceFactory getFactory()
  */
 class ProductAbstractSitemapConnectorRepository extends AbstractRepository implements ProductAbstractSitemapConnectorRepositoryInterface
 {
-
-    /**
-     * @param string $storeName
-     * @param int|null $page
-     * @param int|null $limit
-     *
-     * @return array
-     */
+ /**
+  * @param string $storeName
+  * @param int|null $page
+  * @param int|null $limit
+  *
+  * @return array
+  */
     public function findProductUrlsMappedToSitemapUrlTransfers(string $storeName, ?int $page = null, ?int $limit = null): array
     {
         $urlStorageEntities = $this->findVisibleProductUrls($page, $limit);

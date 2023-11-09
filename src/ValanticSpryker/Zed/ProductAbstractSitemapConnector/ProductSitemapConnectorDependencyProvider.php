@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector;
 
-use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
+use Spryker\Zed\Kernel\Container;
 
 class ProductSitemapConnectorDependencyProvider extends AbstractBundleDependencyProvider
 {
-
-    /**
-     * @var string
-     */
+ /**
+  * @var string
+  */
     public const FACADE_STORE = 'FACADE_STORE';
 
     /**
@@ -24,9 +25,9 @@ class ProductSitemapConnectorDependencyProvider extends AbstractBundleDependency
     public const CLIENT_PRODUCT_STORAGE = 'CLIENT_PRODUCT_STORAGE';
 
     /**
-     * @param Container $container
+     * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return Container
+     * @return \Spryker\Zed\Kernel\Container
      */
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
@@ -37,9 +38,9 @@ class ProductSitemapConnectorDependencyProvider extends AbstractBundleDependency
     }
 
     /**
-     * @param Container $container
+     * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return Container
+     * @return \Spryker\Zed\Kernel\Container
      */
     public function providePersistenceLayerDependencies(Container $container): Container
     {
@@ -49,16 +50,16 @@ class ProductSitemapConnectorDependencyProvider extends AbstractBundleDependency
     }
 
     /**
-     * @param Container $container
-     * @return Container
+     * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @throws \Spryker\Service\Container\Exception\FrozenServiceException
+     * @return \Spryker\Zed\Kernel\Container
      */
     protected function addSitemapService(Container $container): Container
     {
         $container->set(static::SITEMAP_SERVICE, function (Container $container) {
             return $container->getLocator()->sitemap()->service();
         });
+
         return $container;
     }
 
@@ -76,6 +77,11 @@ class ProductSitemapConnectorDependencyProvider extends AbstractBundleDependency
         return $container;
     }
 
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
     private function addProductStorageClient(Container $container): Container
     {
         $container->set(

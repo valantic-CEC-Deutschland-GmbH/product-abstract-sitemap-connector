@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence;
 
 interface ProductAbstractSitemapConnectorRepositoryInterface
@@ -12,5 +14,4 @@ interface ProductAbstractSitemapConnectorRepositoryInterface
      * @return array
      */
     public function findProductUrlsMappedToSitemapUrlTransfers(string $storeName, ?int $page = null, ?int $limit = null): array;
-
 }
