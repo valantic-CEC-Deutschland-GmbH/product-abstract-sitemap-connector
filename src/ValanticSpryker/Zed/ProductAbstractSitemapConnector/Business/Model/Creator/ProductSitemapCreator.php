@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types = 1);
 
 namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector\Business\Model\Creator;
@@ -7,26 +8,28 @@ use Spryker\Zed\Store\Business\StoreFacadeInterface;
 use ValanticSpryker\Service\Sitemap\SitemapService;
 use ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence\ProductAbstractSitemapConnectorRepositoryInterface;
 use ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConfig;
-use ValanticSpryker\Zed\Sitemap\Business\SitemapFacadeInterface;
 
 class ProductSitemapCreator
 {
-
-    /**
-     * @var string
-     */
+ /**
+  * @var string
+  */
     private const PRODUCTS = 'products';
 
     private SitemapService $sitemapService;
+
     private ProductAbstractSitemapConnectorConfig $config;
+
     private StoreFacadeInterface $storeFacade;
+
     private ProductAbstractSitemapConnectorRepositoryInterface $repository;
 
     /**
-     * @param SitemapFacadeInterface $sitemapFacade
-     * @param StoreFacadeInterface $storeFacade
+     * @param \ValanticSpryker\Service\Sitemap\SitemapService $sitemapService
+     * @param \ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence\ProductAbstractSitemapConnectorRepositoryInterface $repository
+     * @param \ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConfig $config
+     * @param \Spryker\Zed\Store\Business\StoreFacadeInterface $storeFacade
      */
-    //todo create service from helper
     public function __construct(
         SitemapService $sitemapService,
         ProductAbstractSitemapConnectorRepositoryInterface $repository,
@@ -37,7 +40,6 @@ class ProductSitemapCreator
         $this->repository = $repository;
         $this->config = $config;
         $this->storeFacade = $storeFacade;
-
     }
 
     /**

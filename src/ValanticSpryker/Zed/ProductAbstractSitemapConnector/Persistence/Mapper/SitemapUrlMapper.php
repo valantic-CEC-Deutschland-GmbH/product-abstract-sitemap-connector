@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence\Mapper;
 
 use Generated\Shared\Transfer\SitemapUrlTransfer;
@@ -11,36 +13,37 @@ use ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapCo
 class SitemapUrlMapper
 {
     /**
-     * @var ProductAbstractSitemapConnectorConfig
+     * @var \ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConfig
      */
     private ProductAbstractSitemapConnectorConfig $config;
 
     /**
-     * @var ProductStorageClientInterface
+     * @var \Spryker\Client\ProductStorage\ProductStorageClientInterface
      */
     private ProductStorageClientInterface $productStorageClient;
 
+    /**
+     * @param \ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConfig $config
+     * @param \Spryker\Client\ProductStorage\ProductStorageClientInterface $productStorageClient
+     */
     public function __construct(
         ProductAbstractSitemapConnectorConfig $config,
-        ProductStorageClientInterface         $productStorageClient
-    )
-    {
+        ProductStorageClientInterface $productStorageClient
+    ) {
         $this->config = $config;
         $this->productStorageClient = $productStorageClient;
     }
 
     /**
-     * @param ObjectCollection $urlStorageEntities
+     * @param \Propel\Runtime\Collection\ObjectCollection $urlStorageEntities
      * @param string $storeName
      *
      * @return array
-     * @throws \Propel\Runtime\Exception\PropelException
      */
     public function mapUrlStorageEntitiesToSitemapUrlTransfers(
         ObjectCollection $urlStorageEntities,
-        string           $storeName
-    ): array
-    {
+        string $storeName
+    ): array {
         $transfers = [];
         /** @var \Orm\Zed\UrlStorage\Persistence\SpyUrlStorage $entity */
         foreach ($urlStorageEntities as $entity) {
@@ -86,7 +89,7 @@ class SitemapUrlMapper
     }
 
     /**
-     * @param SpyUrlStorage $entity
+     * @param \Orm\Zed\UrlStorage\Persistence\SpyUrlStorage $entity
      *
      * @return bool
      */
@@ -97,6 +100,7 @@ class SitemapUrlMapper
                 $entity->getFkProductAbstract(),
             );
         }
+
         return true;
     }
 }
