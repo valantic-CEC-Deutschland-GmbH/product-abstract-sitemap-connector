@@ -24,7 +24,7 @@ Make sure to add **auth.json** to your **.gitignore**.
 
 1. Install dependency
 ```
-composer require valantic-spryker/product-sitemap-connector
+composer require valantic-spryker/product-abstract-sitemap-connector
 ```
 
 2. Register ConnectorPlugin
