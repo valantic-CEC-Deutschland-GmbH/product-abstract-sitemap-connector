@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types = 1);
 
 namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector;
@@ -7,11 +12,11 @@ namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
-class ProductSitemapConnectorDependencyProvider extends AbstractBundleDependencyProvider
+class ProductAbstractSitemapConnectorDependencyProvider extends AbstractBundleDependencyProvider
 {
- /**
-  * @var string
-  */
+    /**
+     * @var string
+     */
     public const FACADE_STORE = 'FACADE_STORE';
 
     /**
@@ -25,26 +30,20 @@ class ProductSitemapConnectorDependencyProvider extends AbstractBundleDependency
     public const CLIENT_PRODUCT_STORAGE = 'CLIENT_PRODUCT_STORAGE';
 
     /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
+     * @var string
      */
-    public function provideCommunicationLayerDependencies(Container $container): Container
-    {
-        $container = $this->addStoreFacade($container);
-        $container = $this->addSitemapService($container);
-
-        return $container;
-    }
+    public const FACADE_PRODUCT_LIST = 'FACADE_PRODUCT_LIST';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function providePersistenceLayerDependencies(Container $container): Container
+    public function provideBusinessLayerDependencies(Container $container): Container
     {
-        $container = $this->addProductStorageClient($container);
+        $container = $this->addSitemapService($container);
+        $container = $this->addProductListFacade($container);
+        $container = $this->addStoreFacade($container);
 
         return $container;
     }
@@ -82,12 +81,11 @@ class ProductSitemapConnectorDependencyProvider extends AbstractBundleDependency
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    private function addProductStorageClient(Container $container): Container
+    private function addProductListFacade(Container $container): Container
     {
-        $container->set(
-            self::CLIENT_PRODUCT_STORAGE,
-            fn (Container $container) => $container->getLocator()->productStorage()->client(),
-        );
+        $container->set(self::FACADE_PRODUCT_LIST, function (Container $container) {
+            return $container->getLocator()->productList()->facade();
+        });
 
         return $container;
     }

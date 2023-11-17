@@ -4,7 +4,7 @@
     "description": "Provides product abstract urls for valantic-spriker/sitemap module",
     "license": "MIT",
     "require": {
-        "php": ">=8.0",
+        "php": ">=7.4",
         "valantic-spryker/sitemap": "^1.0"
     },
     "autoload": {
@@ -21,7 +21,7 @@
     "prefer-stable": true,
     "config": {
         "platform": {
-            "php": "8.0.19"
+            "php": "7.4"
         },
         "preferred-install": "dist",
         "use-include-path": true,
