@@ -12,6 +12,7 @@ namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence\Mapper
 use Generated\Shared\Transfer\SitemapUrlTransfer;
 use Orm\Zed\Url\Persistence\SpyUrl;
 use Propel\Runtime\Collection\ObjectCollection;
+use ValanticSpryker\Shared\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConstants;
 use ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConfig;
 
 class ProductAbstractSitemapUrlMapper
@@ -63,7 +64,7 @@ class ProductAbstractSitemapUrlMapper
             ->setUrl($this->formatUrl($urlEntity))
             ->setUpdatedAt($urlEntity->getVirtualColumn('updated_at'))
             ->setResourceId($urlEntity->getFkResourceProductAbstract())
-            ->setResourceType(ProductAbstractSitemapConnectorConfig::RESOURCE_TYPE);
+            ->setResourceType(ProductAbstractSitemapConnectorConstants::RESOURCE_TYPE);
     }
 
     /**

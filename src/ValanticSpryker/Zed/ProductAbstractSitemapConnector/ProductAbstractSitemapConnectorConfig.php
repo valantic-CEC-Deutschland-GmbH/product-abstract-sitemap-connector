@@ -15,8 +15,6 @@ use ValanticSpryker\Shared\Sitemap\SitemapConstants;
 
 class ProductAbstractSitemapConnectorConfig extends AbstractBundleConfig
 {
-    public const RESOURCE_TYPE = 'abstract_product';
-
     /**
      * @return string
      */

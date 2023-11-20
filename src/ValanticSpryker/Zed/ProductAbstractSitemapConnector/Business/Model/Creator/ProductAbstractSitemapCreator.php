@@ -11,6 +11,7 @@ namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector\Business\Model\Cre
 
 use Spryker\Zed\Store\Business\StoreFacadeInterface;
 use ValanticSpryker\Service\Sitemap\SitemapServiceInterface;
+use ValanticSpryker\Shared\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConstants;
 use ValanticSpryker\Zed\ProductAbstractSitemapConnector\Business\Model\Filter\UrlFilterInterface;
 use ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence\ProductAbstractSitemapConnectorRepositoryInterface;
 use ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConfig;
@@ -74,7 +75,7 @@ class ProductAbstractSitemapCreator
                 $urlList,
                 $page,
                 $currentStoreTransfer->getName(),
-                ProductAbstractSitemapConnectorConfig::RESOURCE_TYPE,
+                ProductAbstractSitemapConnectorConstants::RESOURCE_TYPE,
             );
 
             if ($sitemapTransfer !== null) {
