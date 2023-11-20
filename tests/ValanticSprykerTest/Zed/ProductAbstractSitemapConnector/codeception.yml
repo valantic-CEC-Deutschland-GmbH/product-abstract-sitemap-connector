@@ -1,0 +1,22 @@
+namespace: ValanticSprykerTest\Zed\ProductAbstractSitemapConnector
+paths:
+    tests: .
+    data: _data
+    support: _support
+    output: _output
+
+suites:
+    Business:
+        path: Business
+        actor: ProductAbstractSitemapConnectorTester
+        modules:
+            enabled:
+               - Asserts
+               - \SprykerTest\Shared\Testify\Helper\Environment
+               - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+               - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                   projectNamespaces: ['Pyz', 'ValanticSpryker']
+               - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+               - \SprykerTest\Shared\Product\Helper\ProductDataHelper
+               - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+               - \SprykerTest\Zed\ProductList\Helper\ProductListHelper

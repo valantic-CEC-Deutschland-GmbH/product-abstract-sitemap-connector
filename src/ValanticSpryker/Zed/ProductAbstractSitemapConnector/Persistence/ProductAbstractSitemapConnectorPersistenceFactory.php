@@ -1,13 +1,17 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types = 1);
 
 namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence;
 
-use Spryker\Client\ProductStorage\ProductStorageClientInterface;
+use Orm\Zed\Url\Persistence\SpyUrlQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
-use ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence\Mapper\SitemapUrlMapper;
-use ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductSitemapConnectorDependencyProvider;
+use ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence\Mapper\ProductAbstractSitemapUrlMapper;
 
 /**
  * @method \ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConfig getConfig()
@@ -15,21 +19,20 @@ use ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductSitemapConnectorD
 class ProductAbstractSitemapConnectorPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
-     * @return \ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence\Mapper\SitemapUrlMapper
+     * @return \ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence\Mapper\ProductAbstractSitemapUrlMapper
      */
-    public function createSitemapUrlMapper(): SitemapUrlMapper
+    public function createSitemapUrlMapper(): ProductAbstractSitemapUrlMapper
     {
-        return new SitemapUrlMapper(
+        return new ProductAbstractSitemapUrlMapper(
             $this->getConfig(),
-            $this->getProductStorageClient(),
         );
     }
 
     /**
-     * @return \Spryker\Client\ProductStorage\ProductStorageClientInterface
+     * @return \Orm\Zed\Url\Persistence\SpyUrlQuery
      */
-    private function getProductStorageClient(): ProductStorageClientInterface
+    public function createSpyUrlQuery(): SpyUrlQuery
     {
-        return $this->getProvidedDependency(ProductSitemapConnectorDependencyProvider::CLIENT_PRODUCT_STORAGE);
+        return SpyUrlQuery::create();
     }
 }

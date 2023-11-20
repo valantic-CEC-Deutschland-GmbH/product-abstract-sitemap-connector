@@ -1,17 +1,24 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types = 1);
 
 namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence;
 
+use Generated\Shared\Transfer\StoreTransfer;
+
 interface ProductAbstractSitemapConnectorRepositoryInterface
 {
     /**
-     * @param string $storeName
-     * @param int|null $page
-     * @param int|null $limit
+     * @param \Generated\Shared\Transfer\StoreTransfer $currentStore
+     * @param int $page
+     * @param int $limit
      *
-     * @return array
+     * @return array<\Generated\Shared\Transfer\SitemapUrlTransfer>
      */
-    public function findProductUrlsMappedToSitemapUrlTransfers(string $storeName, ?int $page = null, ?int $limit = null): array;
+    public function findActiveAbstractProductUrls(StoreTransfer $currentStore, int $page, int $limit): array;
 }

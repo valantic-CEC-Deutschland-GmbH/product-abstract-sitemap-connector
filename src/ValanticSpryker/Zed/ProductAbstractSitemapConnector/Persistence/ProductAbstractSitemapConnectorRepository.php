@@ -1,9 +1,15 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types = 1);
 
 namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence;
 
+use Generated\Shared\Transfer\StoreTransfer;
 use Orm\Zed\Url\Persistence\Map\SpyUrlTableMap;
 use Orm\Zed\UrlStorage\Persistence\Map\SpyUrlStorageTableMap;
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -15,45 +21,56 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
  */
 class ProductAbstractSitemapConnectorRepository extends AbstractRepository implements ProductAbstractSitemapConnectorRepositoryInterface
 {
- /**
-  * @param string $storeName
-  * @param int|null $page
-  * @param int|null $limit
-  *
-  * @return array
-  */
-    public function findProductUrlsMappedToSitemapUrlTransfers(string $storeName, ?int $page = null, ?int $limit = null): array
+    /**
+     * @param \Generated\Shared\Transfer\StoreTransfer $currentStore
+     * @param int $page
+     * @param int $limit
+     *
+     * @return array<\Generated\Shared\Transfer\SitemapUrlTransfer>
+     */
+    public function findActiveAbstractProductUrls(StoreTransfer $currentStore, int $page, int $limit): array
     {
-        $urlStorageEntities = $this->findVisibleProductUrls($page, $limit);
+        $urlEntities = $this->findVisibleProductUrls($currentStore->getIdStore(), $page, $limit);
 
         return $this->getFactory()
             ->createSitemapUrlMapper()
-            ->mapUrlStorageEntitiesToSitemapUrlTransfers(
-                $urlStorageEntities,
-                $storeName,
-            );
+            ->mapUrlEntitiesToSitemapUrlTransfers($urlEntities);
     }
 
     /**
-     * @param int|null $page
-     * @param int|null $limit
+     * @param int $idStore
+     * @param int $page
+     * @param int $urlLimit
      *
      * @return \Propel\Runtime\Collection\ObjectCollection
      */
-    private function findVisibleProductUrls(?int $page = null, ?int $limit = null): ObjectCollection
+    private function findVisibleProductUrls(int $idStore, int $page, int $urlLimit): ObjectCollection
     {
-        $query = $this->getFactory()->getSpyUrlStorageQuery()
-            ->filterByFkRedirect(null, Criteria::ISNULL)
-            ->filterByFkProductAbstract(null, Criteria::ISNOTNULL)
-            ->addJoin(SpyUrlStorageTableMap::COL_FK_URL, SpyUrlTableMap::COL_ID_URL, Criteria::INNER_JOIN);
-
-        if ($page !== null && $limit !== null) {
-            $offset = ($page - 1) * $limit;
-            $query
-                ->setOffset($offset)
-                ->setLimit($limit);
-        }
+        $query = $this->getFactory()
+            ->createSpyUrlQuery()
+            ->filterByFkResourceProductAbstract(null, Criteria::ISNOTNULL)
+            ->filterByFkResourceRedirect(null, Criteria::ISNULL)
+            ->useSpyLocaleQuery()
+                ->useLocaleStoreQuery()
+                    ->filterByFkStore($idStore)
+                ->endUse()
+            ->endUse()
+            ->addJoin(SpyUrlTableMap::COL_ID_URL, SpyUrlStorageTableMap::COL_FK_URL, Criteria::INNER_JOIN)
+            ->withColumn(SpyUrlStorageTableMap::COL_UPDATED_AT, 'updated_at')
+            ->setOffset($this->calculateOffsetByPage($page, $urlLimit))
+            ->setLimit($urlLimit);
 
         return $query->find();
+    }
+
+    /**
+     * @param int $page
+     * @param int $pageLimit
+     *
+     * @return int
+     */
+    private function calculateOffsetByPage(int $page, int $pageLimit): int
+    {
+        return ($page - 1) * $pageLimit;
     }
 }
