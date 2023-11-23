@@ -20,7 +20,7 @@ class ProductAbstractSitemapUrlMapper
     /**
      * @var string
      */
-    private const URL_FORMAT = '%s%s/';
+    private const URL_FORMAT = '%s%s';
 
     /**
      * @var \ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConfig
@@ -77,7 +77,7 @@ class ProductAbstractSitemapUrlMapper
         return sprintf(
             self::URL_FORMAT,
             $this->config->getYvesBaseUrl(),
-            rtrim($urlEntity->getUrl(), '/'),
+            $urlEntity->getUrl(),
         );
     }
 }
