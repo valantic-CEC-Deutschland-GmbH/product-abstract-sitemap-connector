@@ -10,6 +10,7 @@ declare(strict_types = 1);
 namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector\Persistence;
 
 use Generated\Shared\Transfer\StoreTransfer;
+use Orm\Zed\Product\Persistence\Map\SpyProductAbstractStoreTableMap;
 use Orm\Zed\Url\Persistence\Map\SpyUrlTableMap;
 use Orm\Zed\UrlStorage\Persistence\Map\SpyUrlStorageTableMap;
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -55,6 +56,11 @@ class ProductAbstractSitemapConnectorRepository extends AbstractRepository imple
                     ->filterByFkStore($idStore)
                 ->endUse()
             ->endUse()
+            ->addJoin(
+                [SpyUrlTableMap::COL_FK_RESOURCE_PRODUCT_ABSTRACT, $idStore],
+                [SpyProductAbstractStoreTableMap::COL_FK_PRODUCT_ABSTRACT, SpyProductAbstractStoreTableMap::COL_FK_STORE],
+                Criteria::INNER_JOIN
+            )
             ->addJoin(SpyUrlTableMap::COL_ID_URL, SpyUrlStorageTableMap::COL_FK_URL, Criteria::INNER_JOIN)
             ->withColumn(SpyUrlStorageTableMap::COL_UPDATED_AT, 'updated_at')
             ->setOffset($this->calculateOffsetByPage($page, $urlLimit))
