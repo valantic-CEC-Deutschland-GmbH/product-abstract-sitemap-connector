@@ -59,7 +59,7 @@ class ProductAbstractSitemapConnectorRepository extends AbstractRepository imple
             ->addJoin(
                 [SpyUrlTableMap::COL_FK_RESOURCE_PRODUCT_ABSTRACT, $idStore],
                 [SpyProductAbstractStoreTableMap::COL_FK_PRODUCT_ABSTRACT, SpyProductAbstractStoreTableMap::COL_FK_STORE],
-                Criteria::INNER_JOIN
+                Criteria::INNER_JOIN,
             )
             ->addJoin(SpyUrlTableMap::COL_ID_URL, SpyUrlStorageTableMap::COL_FK_URL, Criteria::INNER_JOIN)
             ->withColumn(SpyUrlStorageTableMap::COL_UPDATED_AT, 'updated_at')
