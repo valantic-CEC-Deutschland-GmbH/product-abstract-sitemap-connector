@@ -20,3 +20,4 @@ suites:
                - \SprykerTest\Shared\Product\Helper\ProductDataHelper
                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
                - \SprykerTest\Zed\ProductList\Helper\ProductListHelper
+               - \SprykerTest\Shared\Url\Helper\UrlDataHelper
