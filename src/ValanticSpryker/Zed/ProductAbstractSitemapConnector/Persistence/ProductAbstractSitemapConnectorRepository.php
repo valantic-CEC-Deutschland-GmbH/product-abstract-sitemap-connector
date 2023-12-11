@@ -51,11 +51,6 @@ class ProductAbstractSitemapConnectorRepository extends AbstractRepository imple
             ->createSpyUrlQuery()
             ->filterByFkResourceProductAbstract(null, Criteria::ISNOTNULL)
             ->filterByFkResourceRedirect(null, Criteria::ISNULL)
-            ->useSpyLocaleQuery()
-                ->useLocaleStoreQuery()
-                    ->filterByFkStore($idStore)
-                ->endUse()
-            ->endUse()
             ->addJoin(
                 [SpyUrlTableMap::COL_FK_RESOURCE_PRODUCT_ABSTRACT, $idStore],
                 [SpyProductAbstractStoreTableMap::COL_FK_PRODUCT_ABSTRACT, SpyProductAbstractStoreTableMap::COL_FK_STORE],
