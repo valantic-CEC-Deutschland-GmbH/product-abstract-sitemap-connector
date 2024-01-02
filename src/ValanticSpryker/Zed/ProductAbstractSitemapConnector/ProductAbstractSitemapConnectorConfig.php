@@ -28,7 +28,7 @@ class ProductAbstractSitemapConnectorConfig extends AbstractBundleConfig
      */
     public function getSitemapUrlLimit(): int
     {
-        return $this->get(SitemapConstants::SITEMAP_URL_LIMIT, 100);
+        return $this->get(SitemapConstants::SITEMAP_URL_LIMIT, 50_000);
     }
 
     /**
