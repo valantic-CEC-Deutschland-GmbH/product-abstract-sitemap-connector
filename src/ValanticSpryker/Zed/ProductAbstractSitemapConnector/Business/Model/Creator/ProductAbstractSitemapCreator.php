@@ -89,7 +89,7 @@ class ProductAbstractSitemapCreator
     }
 
     /**
-     * @param array<\Generated\Shared\Transfer\SitemapUrlTransfer> $urlList
+     * @param array<\Generated\Shared\Transfer\SitemapUrlNodeTransfer> $urlList
      *
      * @return void
      */
