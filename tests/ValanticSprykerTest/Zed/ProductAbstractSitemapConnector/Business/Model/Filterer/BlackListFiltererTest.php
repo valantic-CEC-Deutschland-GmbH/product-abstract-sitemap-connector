@@ -13,7 +13,7 @@ namespace ValanticSprykerTest\Zed\ProductAbstractSitemapConnector\Business\Model
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ProductListProductConcreteRelationTransfer;
 use Generated\Shared\Transfer\ProductListTransfer;
-use Generated\Shared\Transfer\SitemapUrlTransfer;
+use Generated\Shared\Transfer\SitemapUrlNodeTransfer;
 use ValanticSpryker\Zed\ProductAbstractSitemapConnector\Business\Model\Filterer\BlackListFilterer;
 use ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConfig;
 use ValanticSprykerTest\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorTester;
@@ -59,11 +59,11 @@ class BlackListFiltererTest extends Unit
             $configMock,
         );
 
-        $sitemapUrlTransfer = new SitemapUrlTransfer();
-        $sitemapUrlTransfer->setResourceId($product->getFkProductAbstract());
+        $sitemapUrlNodeTransfer = new SitemapUrlNodeTransfer();
+        $sitemapUrlNodeTransfer->setResourceId($product->getFkProductAbstract());
 
         // Act
-        $filterResult = $blackListFilterer->filter($sitemapUrlTransfer);
+        $filterResult = $blackListFilterer->filter($sitemapUrlNodeTransfer);
 
         // Assert
         self::assertTrue($filterResult);
@@ -96,11 +96,11 @@ class BlackListFiltererTest extends Unit
             $configMock,
         );
 
-        $sitemapUrlTransfer = new SitemapUrlTransfer();
-        $sitemapUrlTransfer->setResourceId($product->getFkProductAbstract());
+        $sitemapUrlNodeTransfer = new SitemapUrlNodeTransfer();
+        $sitemapUrlNodeTransfer->setResourceId($product->getFkProductAbstract());
 
         // Act
-        $filterResult = $blackListFilterer->filter($sitemapUrlTransfer);
+        $filterResult = $blackListFilterer->filter($sitemapUrlNodeTransfer);
 
         // Assert
         self::assertFalse($filterResult);
@@ -133,11 +133,11 @@ class BlackListFiltererTest extends Unit
             $configMock,
         );
 
-        $sitemapUrlTransfer = new SitemapUrlTransfer();
-        $sitemapUrlTransfer->setResourceId($product->getFkProductAbstract());
+        $sitemapUrlNodeTransfer = new SitemapUrlNodeTransfer();
+        $sitemapUrlNodeTransfer->setResourceId($product->getFkProductAbstract());
 
         // Act
-        $filterResult = $blackListFilterer->filter($sitemapUrlTransfer);
+        $filterResult = $blackListFilterer->filter($sitemapUrlNodeTransfer);
 
         // Assert
         self::assertTrue($filterResult);

@@ -18,7 +18,7 @@ interface ProductAbstractSitemapConnectorRepositoryInterface
      * @param int $page
      * @param int $limit
      *
-     * @return array<\Generated\Shared\Transfer\SitemapUrlTransfer>
+     * @return array<\Generated\Shared\Transfer\SitemapUrlNodeTransfer>
      */
     public function findActiveAbstractProductUrls(StoreTransfer $currentStore, int $page, int $limit): array;
 }

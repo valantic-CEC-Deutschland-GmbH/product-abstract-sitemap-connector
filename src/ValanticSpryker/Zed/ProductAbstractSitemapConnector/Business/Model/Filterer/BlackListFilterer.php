@@ -10,7 +10,7 @@ declare(strict_types = 1);
 
 namespace ValanticSpryker\Zed\ProductAbstractSitemapConnector\Business\Model\Filterer;
 
-use Generated\Shared\Transfer\SitemapUrlTransfer;
+use Generated\Shared\Transfer\SitemapUrlNodeTransfer;
 use Spryker\Zed\ProductList\Business\ProductListFacadeInterface;
 use ValanticSpryker\Zed\ProductAbstractSitemapConnector\ProductAbstractSitemapConnectorConfig;
 
@@ -39,11 +39,11 @@ class BlackListFilterer implements FiltererInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SitemapUrlTransfer $sitemapUrlTransfer
+     * @param \Generated\Shared\Transfer\SitemapUrlNodeTransfer $sitemapUrlNodeTransfer
      *
      * @return bool
      */
-    public function filter(SitemapUrlTransfer $sitemapUrlTransfer): bool
+    public function filter(SitemapUrlNodeTransfer $sitemapUrlNodeTransfer): bool
     {
         if (!$this->config->filterAbstractProductsByBlackLists()) {
             return true;
@@ -51,7 +51,7 @@ class BlackListFilterer implements FiltererInterface
 
         $blackListIdsTheProductIsIn = $this->productListFacade
             ->getProductBlacklistIdsByIdProductAbstract(
-                $sitemapUrlTransfer->getResourceId(),
+                $sitemapUrlNodeTransfer->getResourceId(),
             );
 
         return count($blackListIdsTheProductIsIn) === 0;
